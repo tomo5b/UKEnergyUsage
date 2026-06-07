@@ -37,11 +37,11 @@ def fetch_national() -> None:
 
 def fetch_regional() -> None:
     with httpx.Client() as client:
-        resp = client.get(f"{CARBON_API}/regional/intensity")
+        resp = client.get(f"{CARBON_API}/regional")
         resp.raise_for_status()
 
-    regions = resp.json()["data"]["regions"]
-    ts = resp.json()["data"]["from"]
+    regions = resp.json()["data"][0]["regions"]
+    ts = resp.json()["data"][0]["from"]
 
     rows = [
         {
